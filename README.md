@@ -1,2 +1,3 @@
 # Code-PTIT-DSA-
-Bài tập phân cấu trúc dữ liệu.
+Bài tập cấu trúc dữ liệu và giải thuật
+
