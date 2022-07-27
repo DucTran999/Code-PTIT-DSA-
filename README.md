@@ -1,2 +1,2 @@
 # Code-PTIT-DSA-
-Code một số bài cơ bản phần giải thuật.
+Bài tập phần giải thuật
