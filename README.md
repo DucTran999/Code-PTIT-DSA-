@@ -1,2 +1,2 @@
 # Code-PTIT-DSA-
-Bài tập phần giải thuật
+Bài tập cấu trúc dữ liệu và giải thuật
