@@ -1,55 +1,38 @@
+/* Contributed by Anh Duc */
 #include<bits/stdc++.h>
 using namespace std;
 
-int A[1000];
-int n, k;
-bool isFirst;
+typedef long long ll;
+typedef vector<int> vi;
+#define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
+#define rs(a); memset(a, 0, sizeof(a));
 
-void inp() {
-	cin >> n >> k;
-	for (int i = 1; i <= k; i++) {
-		cin >> A[i];
-	}
-}
+int A[25], n, k;
 
 void prev_Com() {
 	int i = k;
-	while(i >= 1 && A[i] == A[i-1] + 1) {
-		i--;
-	}
-	if(i == 0 && A[i+1] == 1) {
-		isFirst = true;
+	while(i > 0 and A[i] == A[i-1] + 1) --i;
+	if(i == 0) {
+		for(int j = 1; j <= k; j++) cout << n - k + j << " ";
 	} else {
 		A[i]--;
-		if(A[k] != n) {5
-		
-			for(int j = i+1; j<=k; j++) {
-				A[j] = A [j] + 1;
-			}
-		}
-	}
-}
-
-void in() {
-	if(isFirst) {
-		for (int i = 1; i <= k; i++) {
-			cout << n - k + i<<" ";
-		}
-		cout << endl;
-	} else {
-		for (int i = 1; i <= k; i++)
-			cout << A[i] << " ";
-		cout << endl;
+		if(A[k] != n) for(int j = i + 1; j<=k; j++) A[j]++;
+		for(int j = 1; j <= k; j++) cout << A[j] << " ";
 	}
 }
 
 int main() {
-	int t;
+	sync();
+	int t = 1;
 	cin >> t;
-	while (t--) {
-		inp();
+	while(t--) {
+		rs(A); cin >> n >> k;
+		for(int i = 1; i<=k; i++) cin >> A[i];
 		prev_Com();
-		in();
-		isFirst = false;
+		cout << endl;
 	}
+
+	return 0;
 }
+
+
