@@ -7,40 +7,26 @@ typedef vector<int> vi;
 #define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
 #define rs(a); memset(a, 0, sizeof(a));
 
-vector<string> init;
-
-void genAll() {
+void genAll(int n) {
 	queue<string> q;
-	string tmp = "2357";
-	q.push(tmp);
-	while(tmp.size() < 10) {
-		tmp = q.front(); q.pop();
-		init.push_back(tmp);
-		q.push(tmp+"2");
-		q.push(tmp+"3");
-		q.push(tmp+"5");
-		q.push(tmp+"7");
+	q.push("2"); q.push("3"); q.push("5"); q.push("7");
+	while(q.front().size() <= n) {
+		string s = q.front();
+		q.pop();
+		if(s.size() > 3 and s[s.size()-1] != '2') {
+			set<char> setA;
+			for(char c : s) setA.insert(c); 
+			if(setA.size() > 3) cout << s << endl;
+		}
+		q.push(s+"2"); q.push(s+"3"); q.push(s+"5"); q.push(s+"7");
 	}
 }
 
 int main() {
 	sync();
-	int t = 1, n;
-	genAll();
-//	cin >> t;
-	while(t--) {
-		cin >> n;
-		for(int i = 4; i<= n; i++) {
-			for(int j = 0; j < init.size(); j++) {
-				if(init[j].size() == i) {
-					do {
-						if(init[j][i-1] != '2') cout << init[j] <<endl;
-					} while(next_permutation(init[j].begin(),init[j].end()));
-				}
-			}
-		}
-	}
-
+	int n; cin >> n;
+	genAll(n);
+	
 	return 0;
 }
 
