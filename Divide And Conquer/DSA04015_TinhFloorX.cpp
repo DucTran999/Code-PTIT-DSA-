@@ -1,30 +1,31 @@
+/* Contributed by Anh Duc */
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 
+typedef long long ll;
+typedef vector<int> vi;
+#define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
+#define rs(a); memset(a, 0, sizeof(a));
+
+int floorX(int *A, int n, int x) {
+	int idx = lower_bound(A, A + n, x) - A;
+	if(idx > 0 and A[idx] == x) return idx+1;
+	else if(idx > 0) return idx;
+	return -1;
+}
 
 int main() {
-	int t;
+	sync();
+	int t = 1, n, x;
 	cin >> t;
-	ll n, X;
 	while(t--) {
-		cin >> n >> X;
-		vector<int> A(n);
-		for(int i = 0; i<n; i++) {
-			cin >> A[i];
-		}
-		int ind = lower_bound(A.begin(), A.end(), X) - A.begin();
-		if(A[ind] != X) {
-			ind--;
-		}
-		if(ind > 0) {
-			ind++;
-		} else {
-			ind = -1;
-		}
-		cout << ind << endl;
+		cin >> n >> x;
+		int A[n];
+		for(int &i : A) cin >> i;
+		cout << floorX(A, n, x) << endl;
 	}
 
 	return 0;
 }
+
 
