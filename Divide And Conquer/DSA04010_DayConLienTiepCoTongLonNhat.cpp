@@ -1,44 +1,36 @@
+/* Contributed by Anh Duc */
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-ll max (ll a, ll b) {
-	return (a > b) ? a : b;
-}
-void inp(int A[], int B[], int n) {
-	for(int i = 1; i <=n; i++) {
-		cin >> A[i];
-		B[i] = 0;
-	}
-}
+typedef long long ll;
+typedef vector<int> vi;
+#define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
+#define rs(a); memset(a, 0, sizeof(a));
 
-long long solve(int A[], int E[], int n) {
-	if(n == 1) return A[1];
-	E[1] = A[1];
-	ll theMax = LONG_MIN;
-	for(int i =2; i<=n; i++) {
-		if(E[i-1] > 0) {
-			E[i] = E[i-1] + A[i];
-		} else {
-			E[i] = A[i];
-		}
-		theMax = max(theMax, E[i]);
+/*MSP: Maximum subarray problem*/
+
+ll MSP(int *A, int n) {
+	int prev_record = *A, ans = INT_MIN;
+	for(int i = 1; i<n; i++) {
+		if(prev_record > 0) prev_record += A[i];
+		else prev_record = A[i];
+		ans = max(ans, prev_record);
 	}
-	return theMax;
+	return ans;
 }
 
 int main() {
-
-	int t;
+	sync();
+	int t = 1, n;
 	cin >> t;
 	while(t--) {
-		int n;
 		cin >> n;
-		int A[n+1], E[n+1];
-		inp(A, E, n);
-		cout << solve(A,E, n) << endl;
+		int A[n];
+		for(int &i : A) cin >> i;
+		cout << MSP(A, n) << endl;
 	}
 
 	return 0;
 }
+
 
