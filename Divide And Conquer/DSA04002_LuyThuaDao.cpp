@@ -1,30 +1,34 @@
+/* Contributed by Anh Duc */
 #include<bits/stdc++.h>
 using namespace std;
 
-const long long M = 1e9+7;
+typedef long long ll;
+typedef vector<int> vi;
+#define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
+#define rs(a); memset(a, 0, sizeof(a));
+const int mod = 1e9+7;
 
-long long expo(long long a, long long k) {
-	long long ans = 1;
-	while(k) {
-		if(k&1)
-			ans = ((ans%M)*(a%M))%M;
-		k >>= 1;
-		a = ((a%M) * (a%M))%M;
-	}
-	return ans%M;
+ll expo (ll a, ll k) {
+	if(k == 0) return 1;
+	ll ans = expo(a, k >> 1)%mod;
+	ans = (ans*ans)%mod;
+	if(k&1) ans = (ans*a)%mod;
+	return ans;
 }
 
 int main() {
-	int t;
+	sync();
+	int t = 1;
+	string n, e;
 	cin >> t;
-	string n, k;
 	while(t--) {
 		cin >> n;
-		k = n;
-		reverse(k.begin(), k.end());
-		cout << expo(stoll(n),stoll(k)) << endl;
+		e = n;
+		reverse(e.begin(), e.end());
+		cout << expo(stoll(n), stoll(e)) << endl;
 	}
 
 	return 0;
 }
+
 

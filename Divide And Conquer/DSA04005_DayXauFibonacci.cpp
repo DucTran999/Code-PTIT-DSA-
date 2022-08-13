@@ -1,34 +1,37 @@
+/* Contributed by Anh Duc */
 #include<bits/stdc++.h>
 using namespace std;
 
-long long fi[100];
+typedef long long ll;
+typedef vector<int> vi;
+#define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
+#define rs(a); memset(a, 0, sizeof(a));
 
+ll f[100];
 void fibo() {
-	fi[0] = 0;
-	fi[1] = 1;
-	for(int i = 2; i <= 92; i++) {
-		fi[i] = fi[i-1] + fi[i-2];
-	}
+	f[1] = 1; f[2] = 1;
+	for(int i = 3; i < 93; i++) f[i] = f[i-2] + f[i-1];
 }
 
-char findK(int n, long long k) {
+char findK(ll n, ll k) {
 	if(n == 1) return 'A';
 	if(n == 2) return 'B';
-	if(k >  fi[n-2])
-		return findK(n-1, k - fi[n-2]);
+	if(k > f[n-2]) return findK(n - 1, k - f[n-2]);
 	return findK(n-2, k);
 }
 
 int main() {
+	sync();
 	fibo();
-	int t;
+	int t = 1;
 	cin >> t;
 	while(t--) {
-		long long n, k;
+		ll n, k;
 		cin >> n >> k;
-		cout << findK(n, k)<< endl;
+		cout << findK(n, k) << endl;
 	}
 
 	return 0;
 }
+
 

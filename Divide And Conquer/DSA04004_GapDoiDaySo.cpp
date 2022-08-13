@@ -1,32 +1,40 @@
+/* Contributed by Anh Duc */
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-ll expo(ll a, ll k) {
+typedef long long ll;
+typedef vector<int> vi;
+#define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
+#define rs(a); memset(a, 0, sizeof(a));
+
+ll expo(ll a, ll b) {
 	ll ans = 1;
-	while(k) {
-		if(k&1) ans*=a;
-		k>>=1;
-		a*=a;
+	while(b) {
+		if(b&1) ans*=a;
+		b>>=1;
+		a = a*a;
 	}
 	return ans;
 }
 
-long long FindK(long long n, long long k) {
-	ll mid = expo(2,n-1);
+int findK(ll n, ll k) {
+	ll mid = expo(2, n-1);
 	if(k == mid) return n;
-	if(k > mid)
-		return FindK(n-1, k - mid);
-	return FindK(n-1, k);
+	if(k < mid) return findK(n-1, k);
+	return findK(n - 1, k - mid);
 }
 
 int main() {
-	int t;
+	sync();
+	int t = 1;
 	cin >> t;
 	while(t--) {
-		long long n, k;
+		ll n, k;
 		cin >> n >> k;
-		cout << FindK(n, k) << endl;
+		cout << findK(n, k) << endl;
 	}
+
 	return 0;
 }
+
+
