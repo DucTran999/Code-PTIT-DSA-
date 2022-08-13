@@ -1,12 +1,14 @@
+/* Contributed by Anh Duc */
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-ll solve(vector<ll> &A, vector<ll>&B, int n) {
-	ll ans = -1;
-	if(A[0] != B[0]) return 0;
-	if(A[n-1] != B[n-2]) return n-2;
-	ll l = 1, r = n-2;
+typedef long long ll;
+typedef vector<int> vi;
+#define sync(); ios_base::sync_with_stdio(0); cin.tie(nullptr);
+#define rs(a); memset(a, 0, sizeof(a));
+
+ll findDif(ll *A, ll *B, ll n) {
+	ll ans = 0, l = 0, r = n-1;
 	while(l <= r) {
 		ll mid = (l+r)>>1;
 		if(B[mid] != A[mid]) {
@@ -16,25 +18,22 @@ ll solve(vector<ll> &A, vector<ll>&B, int n) {
 			l = mid + 1;
 		}
 	}
-	return ans;
+	return ans+1;
 }
 
 int main() {
-
-	int t;
+	sync();
+	ll t = 1, n;
 	cin >> t;
 	while(t--) {
-		int n;
 		cin >> n;
-		vector<ll> A(n), B(n-1);
-		for(int i = 0; i < n; i++) {
-			cin>> A[i];
-		}
-		for(int j = 0; j < n-1; j++)
-			cin >> B[j];
-		cout << solve(A, B, n)+1 << endl;
+		ll A[n], B[n-1];
+		for(int i = 0; i < n; i++) cin >> A[i];
+		for(int i = 0; i < n-1; i++) cin >> B[i];
+		cout << findDif(A, B, n) << endl;
 	}
 
 	return 0;
 }
+
 
